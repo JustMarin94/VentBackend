@@ -2,6 +2,8 @@ const sensorController = require("./sensorController");
 const relayController = require("./relayController");
 const configController = require("./configController");
 const dataController = require("./dataController");
+const motionController = require("./motionController");
+const alarmController = require("./alarmController");
 
 function handleRequest(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,6 +20,8 @@ function handleRequest(req, res) {
   if (req.url.startsWith("/api/relay")) return relayController(req, res);
   if (req.url.startsWith("/api/config")) return configController(req, res);
   if (req.url.startsWith("/api/data")) return dataController(req, res);
+  if (req.url.startsWith("/api/motion")) return motionController(req, res);
+  if (req.url.startsWith("/api/alarm")) return alarmController(req, res);
 
   res.writeHead(404, { "Content-Type": "text/plain" });
   res.end("Not Found\n");
