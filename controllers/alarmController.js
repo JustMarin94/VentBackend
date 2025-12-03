@@ -17,42 +17,6 @@ function alarmController(req, res) {
     return;
   }
 
-  // -------------------- POST /api/alarm --------------------
-  if (req.method === "POST" && req.url === "/api/alarm") {
-    let body = "";
-
-    req.on("data", (chunk) => (body += chunk));
-
-    req.on("end", () => {
-      try {
-        const data = JSON.parse(body);
-
-        const alarm = data.alarm;
-
-        if (alarm !== "ON" && alarm !== "OFF") {
-          res.writeHead(400, { "Content-Type": "text/plain" });
-          res.end("Invalid alarm state\n");
-          return;
-        }
-
-        settings.alarmState = alarm;
-
-        console.log(
-          alarm === "ON" ? "🚨 Alarm turned ON" : "✔️ Alarm turned OFF"
-        );
-
-        res.writeHead(200, { "Content-Type": "text/plain" });
-        res.end("Alarm state updated\n");
-      } catch (err) {
-        console.error("❌ Invalid JSON:", err.message);
-        res.writeHead(400, { "Content-Type": "text/plain" });
-        res.end("Invalid JSON\n");
-      }
-    });
-
-    return;
-  }
-
   // GET current armed state
   if (req.method === "GET" && req.url === "/api/alarmArmed") {
     res.writeHead(200, { "Content-Type": "application/json" });
@@ -76,6 +40,7 @@ function alarmController(req, res) {
           return;
         }
 
+        settings.alarmManual = true;
         settings.alarmArmed = data.armed;
 
         console.log(

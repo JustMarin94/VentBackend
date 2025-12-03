@@ -23,7 +23,7 @@ setInterval(() => {
   // Detect alarm state change
   if (settings.alarmState === "ON" && lastAlarmState !== "ON") {
     console.log("🚨 Alarm triggered! Sending WhatsApp message...");
-    sendWhatsApp("Alert: Alarm triggered!"); // call your WhatsApp API here
+    //sendWhatsApp("Alert: Alarm triggered!"); // call your WhatsApp API here
   }
 
   lastAlarmState = settings.alarmState;

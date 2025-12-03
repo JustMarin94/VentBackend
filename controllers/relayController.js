@@ -2,9 +2,6 @@ const settings = require("../config/settings");
 
 function relayController(req, res) {
   if (req.method === "GET" && req.url === "/api/relay") {
-    console.log(
-      `🔁 Relay info requested: State=${settings.relayState}, Mode=${settings.relayMode}`
-    );
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end(settings.relayState);
   } else if (req.method === "POST" && req.url === "/api/relay") {
